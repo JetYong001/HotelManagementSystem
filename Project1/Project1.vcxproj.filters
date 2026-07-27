@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Customer Management">
+      <UniqueIdentifier>{04ec97ad-a70a-4ae0-ab92-7457df4b8495}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Room Booking">
+      <UniqueIdentifier>{03e4b840-3d66-4346-97b3-97d458f7c033}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Report">
+      <UniqueIdentifier>{bc362b01-0715-44b8-a543-d9be1f5ab9a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Price Management">
+      <UniqueIdentifier>{ef1921e8-e5dd-4d4e-a22f-c064d1d9b8a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Room Management">
+      <UniqueIdentifier>{4ab65b75-87e8-47c1-84cb-1bcd697ebd89}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CustomerManagement.cpp">
+      <Filter>Source Files\Customer Management</Filter>
+    </ClCompile>
+    <ClCompile Include="Global.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="roomBooking.cpp">
+      <Filter>Source Files\Room Booking</Filter>
+    </ClCompile>
+    <ClCompile Include="editPrice.cpp">
+      <Filter>Source Files\Price Management</Filter>
+    </ClCompile>
+    <ClCompile Include="roomManagement.cpp">
+      <Filter>Source Files\Room Management</Filter>
+    </ClCompile>
+    <ClCompile Include="initializeRoom.cpp">
+      <Filter>Source Files\Room Management</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="struct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Global.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
