@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include "struct.h"
 #include "Global.h"
 
@@ -393,45 +394,56 @@ void deleteCustomer()
     system("pause");
 }
 
-
-void displayAllCustomer() {
-
-    system("cls");
-
-    cout << "==================================\n";
-    cout << "Display All Customer\n";
-    cout << "==================================\n\n";
-
-
-    bool found = false;
-
-
+bool displayCustomerTable() {
+    bool hasCustomers = false;
     for (int i = 0; i < MAX_CUSTOMER; i++) {
-
         if (!customers[i].customerID.empty()) {
-
-            found = true;
-
-            cout << "Customer " << i + 1 << "\n";
-            cout << "----------------------------------\n";
-            cout << "Customer ID: " << customers[i].customerID << "\n";
-            cout << "Customer Name: " << customers[i].name << "\n";
-            cout << "Customer IC: " << customers[i].ic << "\n";
-            cout << "Customer Phone Number: " << customers[i].phone << "\n";
-            cout << "\n";
+            hasCustomers = true;
+            break;
         }
     }
 
-
-    if (!found) {
-
-        system("cls");
-        cout << "+-----------------------------+\n";
-        cout << "No customer record found!\n";
-        cout << "+-----------------------------+\n";
-
+    if (!hasCustomers) {
+        cout << "+---------------------------------------+\n";
+        cout << "| No customer records available!        |\n";
+        cout << "+---------------------------------------+\n\n";
+        return false;
     }
 
+    string tableBorder = "+------------+---------------------------+------------------+------------------+--------------+";
+
+    cout << tableBorder << "\n";
+    cout << "| " << left << setw(10) << "ID"
+        << " | " << setw(25) << "Name"
+        << " | " << setw(16) << "IC Number"
+        << " | " << setw(16) << "Phone Number"
+        << " | " << setw(12) << "Type"
+        << " |\n";
+    cout << tableBorder << "\n";
+
+    for (int i = 0; i < MAX_CUSTOMER; i++) {
+        if (!customers[i].customerID.empty()) {
+            cout << "| " << left << setw(10) << customers[i].customerID
+                << " | " << setw(25) << customers[i].name
+                << " | " << setw(16) << customers[i].ic
+                << " | " << setw(16) << customers[i].phone
+                << " | " << setw(12) << customers[i].memberType
+                << " |\n";
+        }
+    }
+    cout << tableBorder << "\n\n";
+    return true;
+}
+
+
+void displayAllCustomer() {
+    system("cls");
+
+    cout << "===============================================================================================\n";
+    cout << "                                        Customers List\n";
+    cout << "===============================================================================================\n\n";
+
+    displayCustomerTable();
 
     system("pause");
 }
