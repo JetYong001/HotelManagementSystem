@@ -2,6 +2,7 @@
 #define GLOBAL_H
 
 #include "Struct.h"
+#include "vector"
 
 #define MAX_CUSTOMER 100
 #define MAX_ROOM 100
@@ -10,6 +11,7 @@
 extern Customer customers[MAX_CUSTOMER];
 extern Room rooms[MAX_ROOM];
 extern Booking bookings[100];
+extern vector<Payment> payments;
 
 
 extern int customerCount;
@@ -25,5 +27,7 @@ extern double regularDiscount;
 extern double premiumDiscount;
 extern double vipDiscount;
 
+extern void clearInputBuffer();
+extern string toUpperString(string str);
 
 #endif

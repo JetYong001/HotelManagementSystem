@@ -28,6 +28,9 @@
     <Filter Include="Source Files\Room Management">
       <UniqueIdentifier>{4ab65b75-87e8-47c1-84cb-1bcd697ebd89}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Payment">
+      <UniqueIdentifier>{148ca45b-5efd-4165-8821-4d72979704bf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -50,6 +53,9 @@
     </ClCompile>
     <ClCompile Include="initializeRoom.cpp">
       <Filter>Source Files\Room Management</Filter>
+    </ClCompile>
+    <ClCompile Include="Payment.cpp">
+      <Filter>Source Files\Payment</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
