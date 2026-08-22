@@ -161,6 +161,7 @@ void searchBooking()
                 cout << "Room Type    : " << bookings[i].roomType << "\n";
                 cout << "Status       : " << bookings[i].status << "\n";
                 cout << "-------------------------------------\n\n";
+                system("pause");
             }
         }
 
@@ -230,7 +231,6 @@ void checkInBooking() {
                 }
 
                 cout << endl;
-                system("pause");
                 break;
             }
         }
@@ -309,7 +309,6 @@ void checkOutBooking() {
                 }
 
                 cout << endl;
-                system("pause");
                 break;
             }
         }
@@ -412,6 +411,7 @@ void cancelBooking() {
 
                 if (confirmChoice == "y" || confirmChoice == "Y") {
                     bookings[i].cancelled = true;
+					bookings[i].status = "Cancelled";
                     for (int r = 0; r < MAX_ROOM; r++) {
                         if (rooms[r].roomID == bookings[i].roomNumber) {
                             rooms[r].available = true;
