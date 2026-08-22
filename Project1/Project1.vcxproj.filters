@@ -57,6 +57,9 @@
     <ClCompile Include="Payment.cpp">
       <Filter>Source Files\Payment</Filter>
     </ClCompile>
+    <ClCompile Include="reporting.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="struct.h">

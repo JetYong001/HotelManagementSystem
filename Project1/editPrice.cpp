@@ -136,44 +136,64 @@ void editDiscount()
             break;
         }
 
-        cout << "\nChange discount from " << (currentDiscount * 100) << "% to " << newDiscount << "% ?\n";
-        cout << "Confirm (y/n): ";
-        if (!(cin >> confirm)) {
+        while (true)
+        {
+            system("cls");
+            cout << "==================================\n";
+            cout << "Edit Discount (" << memberType << ")\n";
+            cout << "==================================\n\n";
+            cout << "Current Discount: " << fixed << setprecision(2) << (currentDiscount * 100) << " %\n\n";
+
+            cout << "Enter new discount (e.g., 10 for 10%): " << newDiscount << "\n\n";
+
+            cout << "Change discount from " << (currentDiscount * 100) << "% to " << newDiscount << "% ?\n";
+            cout << "Confirm (y/n): ";
+            if (!(cin >> confirm)) {
+                clearInputBuffer();
+                system("cls");
+                cout << "+--------------------------------+\n";
+                cout << "| Invalid choice!                |\n";
+                cout << "+--------------------------------+\n";
+                system("pause");
+                continue;
+            }
             clearInputBuffer();
-            system("cls");
-            cout << "+--------------------------------+\n";
-            cout << "| Invalid choice!                |\n";
-            cout << "+--------------------------------+\n";
-            system("pause");
-            continue;
-        }
-        clearInputBuffer();
 
-        if (confirm == 'y' || confirm == 'Y')
-        {
-            if (memberType == "VIP") {
-                vipDiscount = newDiscount / 100.0;
-            }
-            else if (memberType == "Premium") {
-                premiumDiscount = newDiscount / 100.0;
-            }
-            else if (memberType == "Regular") {
-                regularDiscount = newDiscount / 100.0;
-            }
+            if (confirm == 'y' || confirm == 'Y')
+            {
+                if (memberType == "VIP") {
+                    vipDiscount = newDiscount / 100.0;
+                }
+                else if (memberType == "Premium") {
+                    premiumDiscount = newDiscount / 100.0;
+                }
+                else if (memberType == "Regular") {
+                    regularDiscount = newDiscount / 100.0;
+                }
 
-            system("cls");
-            cout << "+--------------------------------+\n";
-            cout << "| Discount updated successfully! |\n";
-            cout << "+--------------------------------+\n";
-            system("pause");
-        }
-        else
-        {
-            system("cls");
-            cout << "+-----------------------------+\n";
-            cout << "| Update cancelled!           |\n";
-            cout << "+-----------------------------+\n";
-            system("pause");
+                system("cls");
+                cout << "+--------------------------------+\n";
+                cout << "| Discount updated successfully! |\n";
+                cout << "+--------------------------------+\n";
+                system("pause");
+                break;
+            }
+            else if (confirm == 'n' || confirm == 'N')
+            {
+                system("cls");
+                cout << "+-----------------------------+\n";
+                cout << "| Update cancelled!           |\n";
+                cout << "+-----------------------------+\n";
+                system("pause");
+                break;
+            }
+            else {
+                system("cls");
+                cout << "+-------------------------------------+\n";
+                cout << "| Invalid choice! Please enter y or n |\n";
+                cout << "+-------------------------------------+\n";
+                system("pause");
+            }
         }
     }
 }
@@ -267,54 +287,74 @@ void editRoomPrice()
             break;
         }
 
-        cout << "\nChange price from RM "<< currentPrice << " to RM " << newPrice << "?\n";
+        while (true)
+        {
+            system("cls");
+            cout << "==================================\n";
+            cout << "Edit " << roomType << " Room Price\n";
+            cout << "==================================\n\n";
 
-        cout << "Confirm (y/n): ";
-        if (!(cin >> confirm)) {
+            cout << "Current Price: RM " << fixed << setprecision(2) << currentPrice << "\n\n";
+
+            cout << "Enter new price (RM): " << newPrice << "\n\n";
+
+            cout << "Change price from RM " << currentPrice << " to RM " << newPrice << "?\n";
+            cout << "Confirm (y/n): ";
+            if (!(cin >> confirm)) {
+                clearInputBuffer();
+                system("cls");
+                cout << "+--------------------------------+\n";
+                cout << "| Invalid choice!                |\n";
+                cout << "+--------------------------------+\n";
+                system("pause");
+                continue;
+            }
             clearInputBuffer();
-            system("cls");
-            cout << "+--------------------------------+\n";
-            cout << "| Invalid choice!                |\n";
-            cout << "+--------------------------------+\n";
-            system("pause");
-            continue;
-        }
-        clearInputBuffer();
 
-        if (confirm == 'y' || confirm == 'Y')
-        {
-            for (int i = 0; i < MAX_ROOM; i++)
+            if (confirm == 'y' || confirm == 'Y')
             {
-                if (rooms[i].roomType == roomType)
+                for (int i = 0; i < MAX_ROOM; i++)
                 {
-                    rooms[i].price = newPrice;
+                    if (rooms[i].roomType == roomType)
+                    {
+                        rooms[i].price = newPrice;
+                    }
                 }
-            }
 
-            if (roomType == "Single") {
-                singlePrice = newPrice;
-            }
-            else if (roomType == "Double") {
-                doublePrice = newPrice;
-            }
-            else if (roomType == "Deluxe") {
-                deluxePrice = newPrice;
-            }
+                if (roomType == "Single") {
+                    singlePrice = newPrice;
+                }
+                else if (roomType == "Double") {
+                    doublePrice = newPrice;
+                }
+                else if (roomType == "Deluxe") {
+                    deluxePrice = newPrice;
+                }
 
-            system("cls");
-            cout << "+-----------------------------+\n";
-            cout << "| Price updated successfully! |\n";
-            cout << "+-----------------------------+\n";
-            system("pause");
+                system("cls");
+                cout << "+-----------------------------+\n";
+                cout << "| Price updated successfully! |\n";
+                cout << "+-----------------------------+\n";
+                system("pause");
+                break;
 
-        }
-        else
-        {
-            system("cls");
-            cout << "+-----------------------------+\n";
-            cout << "| Update cancelled!           |\n";
-            cout << "+-----------------------------+\n";
-            system("pause");
+            }
+            else if (confirm == 'n' || confirm == 'N')
+            {
+                system("cls");
+                cout << "+-----------------------------+\n";
+                cout << "| Update cancelled!           |\n";
+                cout << "+-----------------------------+\n";
+                system("pause");
+                break;
+            }
+            else {
+                system("cls");
+                cout << "+-------------------------------------+\n";
+                cout << "| Invalid choice! Please enter y or n |\n";
+                cout << "+-------------------------------------+\n";
+                system("pause");
+            }
         }
     }
 }

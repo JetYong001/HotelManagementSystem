@@ -50,4 +50,11 @@ struct Payment {
     double change = 0.0;
 };
 
+struct Report {
+    int totalBookings;
+    double totalRevenue;
+    int totalCustomers;
+    int completedPayments;
+};
+
 #endif

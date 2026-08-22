@@ -42,7 +42,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -145,6 +145,7 @@
     <ClCompile Include="initializeRoom.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Payment.cpp" />
+    <ClCompile Include="reporting.cpp" />
     <ClCompile Include="roomBooking.cpp" />
     <ClCompile Include="roomManagement.cpp" />
   </ItemGroup>

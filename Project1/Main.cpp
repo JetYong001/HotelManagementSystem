@@ -9,6 +9,7 @@ void priceManagement();
 void roomManagement();
 void roomBooking();
 void initializeRooms();
+void reporting();
 
 int main(){
 
@@ -25,7 +26,8 @@ int main(){
 		cout << "2. Room Management\n";
 		cout << "3. Price Management\n";
 		cout << "4. Room Booking\n";
-		cout << "5. Exit\n\n";
+		cout << "5. Report\n";
+		cout << "6. Exit\n\n";
 
 		cout << "Enter your choice: ";
 		int choice = getMenuChoice(1, 6);
@@ -53,6 +55,9 @@ int main(){
 			roomBooking();
 			break;
 		case 5:
+			reporting();
+			break;
+		case 6:
 			return 0;
 		default:
 			system("cls");

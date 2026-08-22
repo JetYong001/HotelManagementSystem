@@ -21,6 +21,7 @@ double premiumDiscount = 0.1;
 double vipDiscount = 0.2;
 
 vector<Payment> payments;
+vector<Report> reports;
 
 void clearInputBuffer() {
     cin.clear();

@@ -12,6 +12,7 @@ extern Customer customers[MAX_CUSTOMER];
 extern Room rooms[MAX_ROOM];
 extern Booking bookings[100];
 extern vector<Payment> payments;
+extern vector<Report> reports;
 
 
 extern int customerCount;
