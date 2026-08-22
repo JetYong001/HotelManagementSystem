@@ -29,5 +29,7 @@ extern double vipDiscount;
 
 extern void clearInputBuffer();
 extern string toUpperString(string str);
+extern string toLowerString(string str);
+extern int getMenuChoice(int minVal, int maxVal);
 
 #endif

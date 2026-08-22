@@ -19,7 +19,7 @@ void generateReceipt() {
     Payment lastPayment = payments.back();
 
     cout << "====================================\n";
-    cout << "          PAYMENT RECEIPT\n";
+    cout << "          PAYMENT RECEIPT           \n";
     cout << "====================================\n";
     cout << "Payment ID     : " << lastPayment.paymentId << "\n";
     cout << "Booking ID     : " << lastPayment.bookingId << "\n";
@@ -80,7 +80,9 @@ bool processPayment(string bookingID) {
     }
 
     if (bookIndex == -1) {
-        cout << "\nError: Booking ID not found for payment!\n";
+        cout << "+------------------------------------+\n";
+        cout << "| Booking ID not found for payment!  |\n";
+        cout << "+------------------------------------+\n";
         system("pause");
         return false;
     }
@@ -101,21 +103,40 @@ bool processPayment(string bookingID) {
         cout << "==================================\n\n";
 
         cout << "Payment Method:\n";
+        cout << "----------------------------------\n";
         cout << "1. Cash\n";
         cout << "2. Credit Card\n";
         cout << "3. Debit Card\n";
         cout << "4. Online Banking\n";
         cout << "5. E-Wallet\n";
+        cout << "6. Cancel Payment\n\n";
         cout << "Enter choice: ";
 
-        if (!(cin >> method)) {
-            clearInputBuffer();
-            cout << "\nInvalid payment method.\n";
+        method = getMenuChoice(1, 6);
+
+        if (method == -1) {
+            system("cls");
+            cout << "+--------------------------------+\n";
+            cout << "| Invalid choice!                |\n";
+            cout << "+--------------------------------+\n";
             system("pause");
             continue;
         }
+
+        if (method == 6) {
+            system("cls");
+            cout << "+--------------------------------+\n";
+            cout << "| Payment cancelled.             |\n";
+            cout << "+--------------------------------+\n\n";
+            system("pause");
+            return false;
+        }
+
         if (method < 1 || method > 5) {
-            cout << "\nInvalid payment method.\n";
+            system("cls");
+            cout << "+--------------------------------+\n";
+            cout << "| Invalid choice!                |\n";
+            cout << "+--------------------------------+\n";
             system("pause");
             continue;
         }
@@ -125,15 +146,31 @@ bool processPayment(string bookingID) {
 
         if (method == 1) {
             while (true) {
-                cout << "\nEnter Cash Amount (RM): ";
+                system("cls");
+                cout << "==================================\n";
+                cout << "           CASH PAYMENT           \n";
+                cout << "==================================\n\n";
+                cout << "Total Amount Due: RM " << fixed << setprecision(2) << totalAmount << "\n\n";
+
+                cout << "Paid Amount     : RM ";
                 if (!(cin >> cashPaid)) {
+                    cin.clear();
                     clearInputBuffer();
-                    cout << "Invalid amount. Please enter a valid number.\n";
+                    system("cls");
+                    cout << "+----------------------------------------------+\n";
+                    cout << "| Invalid amount. Please enter a valid number. |\n";
+                    cout << "+----------------------------------------------+\n\n";
+                    system("pause");
                     continue;
                 }
+                clearInputBuffer();
 
                 if (cashPaid < totalAmount) {
-                    cout << "Insufficient cash. You need at least RM " << totalAmount << "\n";
+                    system("cls");
+                    cout << "+------------------------------------------------+\n";
+                    cout << "| Insufficient cash. You need at least RM " << left << setw(7) << totalAmount << " |\n";
+                    cout << "+------------------------------------------------+\n\n";
+                    system("pause");
                 }
                 else {
                     change = cashPaid - totalAmount;
@@ -141,62 +178,106 @@ bool processPayment(string bookingID) {
                 }
             }
         }
-
-        char confirm;
-        cout << "\nConfirm payment of RM " << totalAmount << " (Y/N): ";
-        cin >> confirm;
-        if (confirm != 'Y' && confirm != 'y') {
-            cout << "\nPayment cancelled.\n";
-            system("pause");
-            return false;
+        else {
+            cashPaid = totalAmount;
+            change = 0.0;
         }
 
-        double currentTotalSpent = 0.0;
-        bool customerFound = false;
+        bool paymentConfirmed = false;
+        bool cancelTransaction = false;
 
-        for (int i = 0; i < customerCount; i++) {
-            if (customers[i].customerID == bookings[bookIndex].customerID) {
-                customers[i].totalSpent += totalAmount;
-                currentTotalSpent = customers[i].totalSpent;
-                customerFound = true;
+        while (true) {
+            string headerTitle = (method == 1) ? "CASH PAYMENT" : methods[method - 1] + " PAYMENT";
 
-                if (customers[i].totalSpent >= 5000) {
-                    customers[i].memberType = "VIP";
-                }
-                else if (customers[i].totalSpent >= 500) {
-                    customers[i].memberType = "Premium";
-                }
+            system("cls");
+            cout << "==================================\n";
+            cout << setw((34 - headerTitle.length()) / 2 + headerTitle.length()) << headerTitle << "\n";
+            cout << "==================================\n\n";
+            cout << fixed << setprecision(2);
+            cout << "Total Amount Due: RM " << totalAmount << "\n\n";
+            cout << "Paid Amount     : RM " << cashPaid << "\n\n";
+            if (method == 1) {
+                cout << "Change          : RM " << change << "\n\n";
+            }
+            cout << "Confirm payment of RM " << totalAmount << " (y/n): ";
+
+            string confirm;
+            getline(cin >> ws, confirm);
+
+            if (confirm == "Y" || confirm == "y") {
+                paymentConfirmed = true;
                 break;
+            }
+            else if (confirm == "N" || confirm == "n") {
+                system("cls");
+                cout << "+--------------------------+\n";
+                cout << "| Payment cancelled.       |\n";
+                cout << "+--------------------------+\n\n";
+                system("pause");
+                cancelTransaction = true;
+                break;
+            }
+            else {
+                system("cls");
+                cout << "+--------------------------------+\n";
+                cout << "| Invalid choice! Enter y or n.  |\n";
+                cout << "+--------------------------------+\n\n";
+                system("pause");
             }
         }
 
-        if (!customerFound) {
-            currentTotalSpent = totalAmount;
+        if (cancelTransaction) {
+            return false;
         }
 
-        int nextPaymentNum = static_cast<int>(payments.size()) + 1;
-        string payID = "P";
-        if (nextPaymentNum < 10) payID += "00";
-        else if (nextPaymentNum < 100) payID += "0";
-        payID += to_string(nextPaymentNum);
+        if (paymentConfirmed) {
+            double currentTotalSpent = 0.0;
+            bool customerFound = false;
 
-        Payment payment;
-        payment.paymentId = payID;
-        payment.bookingId = bookings[bookIndex].bookingID;
-        payment.customerName = bookings[bookIndex].customerName;
-        payment.totalPoint = to_string(static_cast<int>(currentTotalSpent));
-        payment.totalAmount = totalAmount;
-        payment.paymentMethod = methods[method - 1];
-        payment.paymentStatus = true;
-        payment.cashPaid = cashPaid;
-        payment.change = change;
+            for (int i = 0; i < customerCount; i++) {
+                if (customers[i].customerID == bookings[bookIndex].customerID) {
+                    customers[i].totalSpent += totalAmount;
+                    currentTotalSpent = customers[i].totalSpent;
+                    customerFound = true;
 
-        payments.push_back(payment);
-        bookings[bookIndex].isPaid = true;
+                    if (customers[i].totalSpent >= 5000) {
+                        customers[i].memberType = "VIP";
+                    }
+                    else if (customers[i].totalSpent >= 500) {
+                        customers[i].memberType = "Premium";
+                    }
+                    break;
+                }
+            }
 
-        system("cls");
-        generateReceipt();
-        system("pause");
-        return true;
+            if (!customerFound) {
+                currentTotalSpent = totalAmount;
+            }
+
+            int nextPaymentNum = static_cast<int>(payments.size()) + 1;
+            string payID = "P";
+            if (nextPaymentNum < 10) payID += "00";
+            else if (nextPaymentNum < 100) payID += "0";
+            payID += to_string(nextPaymentNum);
+
+            Payment payment;
+            payment.paymentId = payID;
+            payment.bookingId = bookings[bookIndex].bookingID;
+            payment.customerName = bookings[bookIndex].customerName;
+            payment.totalPoint = to_string(static_cast<int>(currentTotalSpent));
+            payment.totalAmount = totalAmount;
+            payment.paymentMethod = methods[method - 1];
+            payment.paymentStatus = true;
+            payment.cashPaid = cashPaid;
+            payment.change = change;
+
+            payments.push_back(payment);
+            bookings[bookIndex].isPaid = true;
+
+            system("cls");
+            generateReceipt();
+            system("pause");
+            return true;
+        }
     }
 }

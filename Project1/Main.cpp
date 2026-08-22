@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Global.h"
 
 
 using namespace std;
@@ -27,7 +28,17 @@ int main(){
 		cout << "5. Exit\n\n";
 
 		cout << "Enter your choice: ";
-		cin >> choice;
+		int choice = getMenuChoice(1, 6);
+
+		if (choice == -1) {
+			system("cls");
+			cout << "+--------------------------------+\n";
+			cout << "| Invalid choice!                |\n";
+			cout << "+--------------------------------+\n";
+			system("pause");
+			continue;
+		}
+
 		switch (choice) {
 		case 1:
 			customerManagement();
@@ -46,9 +57,8 @@ int main(){
 		default:
 			system("cls");
 			cout << "+-----------------------------+\n";
-			cout << "Invalid choice!\n";
+			cout << "| Invalid choice!             |\n";
 			cout << "+-----------------------------+\n";
-
 			system("pause");
 		}
 	}

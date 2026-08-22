@@ -33,3 +33,30 @@ string toUpperString(string str) {
     }
     return str;
 }
+
+string toLowerString(string str) {
+    for (int i = 0; i < str.length(); i++) {
+        str[i] = tolower(str[i]);
+    }
+    return str;
+}
+
+int getMenuChoice(int minVal, int maxVal) {
+    string input;
+    getline(cin >> ws, input);
+
+    for (char c : input) {
+        if (!isdigit(c)) return -1;
+    }
+
+    if (input.empty()) return -1;
+
+    try {
+        int val = stoi(input);
+        if (val < minVal || val > maxVal) return -1;
+        return val;
+    }
+    catch (...) {
+        return -1;
+    }
+}

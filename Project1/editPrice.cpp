@@ -5,101 +5,52 @@
 
 using namespace std;
 
-void viewRoomPrice() {
-
-    int choice;
-
-    while (true) {
-
-        system("cls");
-
-        cout << "==================================\n";
-        cout << "View Room Price\n";
-        cout << "==================================\n\n";
-
-        cout << "1. View Room Price\n";
-        cout << "2. Back\n";
-
-        cout << "Enter choice: ";
-        cin >> choice;
-
-        if (choice == 2) {
-            return;
-        }
-        else if (choice != 1) {
-
-            system("cls");
-
-            cout << "+-----------------------------+\n";
-            cout << "Invalid choice!\n";
-            cout << "+-----------------------------+\n";
-
-            system("pause");
-            continue;
-
-        }
-
-        system("cls");
-        cout << "==================================\n";
-        cout << "View Discount\n";
-        cout << "==================================\n\n";
-        cout << "Single Room: RM " << singlePrice << "\n";
-        cout << "Double Room: RM " << doublePrice << "\n";
-        cout << "Deluxe Room: RM " << deluxePrice << "\n\n";
-
-
-        system("pause");
-
-    }
+void displayRoomPriceTable() {
+    cout << "+-------------------+--------------+\n";
+    cout << "| Room Type         | Price (RM)   |\n";
+    cout << "+-------------------+--------------+\n";
+    cout << "| Single Room       | RM " << setw(9) << fixed << setprecision(2) << singlePrice << " |\n";
+    cout << "| Double Room       | RM " << setw(9) << fixed << setprecision(2) << doublePrice << " |\n";
+    cout << "| Deluxe Room       | RM " << setw(9) << fixed << setprecision(2) << deluxePrice << " |\n";
+    cout << "+-------------------+--------------+\n";
 }
+
+void displayDiscountTable() {
+    cout << "+-------------------+--------------+\n";
+    cout << "| Membership Type   |  Discount %  |\n";
+    cout << "+-------------------+--------------+\n";
+    cout << "| VIP               | " << setw(10) << fixed << setprecision(2) << (vipDiscount * 100) << " % |\n";
+    cout << "| Premium           | " << setw(10) << fixed << setprecision(2) << (premiumDiscount * 100) << " % |\n";
+    cout << "| Regular           | " << setw(10) << fixed << setprecision(2) << (regularDiscount * 100) << " % |\n";
+    cout << "+-------------------+--------------+\n";
+}
+
+
+void viewRoomPrice() {
+    system("cls");
+    cout << "====================================\n";
+    cout << "View Room Price\n";
+    cout << "====================================\n\n";
+
+    displayRoomPriceTable();
+    cout << "\n";
+
+    system("pause");
+}
+
 
 void viewDiscount() {
+    system("cls");
+    cout << "====================================\n";
+    cout << "View Discount\n";
+    cout << "====================================\n\n";
 
-    int choice;
+    displayDiscountTable();
+    cout << "\n";
 
-    while (true) {
-
-        system("cls");
-
-        cout << "==================================\n";
-        cout << "View Discount\n";
-        cout << "==================================\n\n";
-
-        cout << "1. View Discount\n";
-        cout << "2. Back\n";
-
-        cout << "Enter choice: ";
-        cin >> choice;
-
-        if (choice == 2) {
-            return;
-        }
-        else if(choice != 1){
-
-            system("cls");
-
-            cout << "+-----------------------------+\n";
-            cout << "Invalid choice!\n";
-            cout << "+-----------------------------+\n";
-
-            system("pause");
-            continue;
-            
-        }
-
-        system("cls");
-        cout << "==================================\n";
-        cout << "View Discount\n";
-        cout << "==================================\n\n";
-        cout << "VIP discount: " << vipDiscount * 100 << " %\n";
-        cout << "Premium discount: " << premiumDiscount * 100 << " %\n";
-        cout << "Regular discount: " << regularDiscount * 100 << " %\n\n";
-
-
-        system("pause");
-
-    }
+    system("pause");
 }
+
 
 void editDiscount()
 {
@@ -110,7 +61,6 @@ void editDiscount()
 
     while (true) {
         system("cls");
-
         cout << "==================================\n";
         cout << "Edit Discount\n";
         cout << "==================================\n\n";
@@ -120,7 +70,16 @@ void editDiscount()
         cout << "4. Exit\n\n";
 
         cout << "Enter choice: ";
-        cin >> choice;
+        choice = getMenuChoice(1, 4);
+
+        if (choice == -1) {
+            system("cls");
+            cout << "+--------------------------------+\n";
+            cout << "| Invalid choice!                |\n";
+            cout << "+--------------------------------+\n";
+            system("pause");
+            continue;
+        }
 
         switch (choice)
         {
@@ -128,41 +87,67 @@ void editDiscount()
             currentDiscount = vipDiscount;
             memberType = "VIP";
             break;
-
         case 2:
             currentDiscount = premiumDiscount;
             memberType = "Premium";
             break;
-
         case 3:
             currentDiscount = regularDiscount;
             memberType = "Regular";
             break;
         case 4:
             return;
-
         default:
-            system("cls");
-            cout << "+-----------------------------+\n";
-            cout << "Invalid choice!\n";
-            cout << "+-----------------------------+\n";
+            cout << "+--------------------------------+\n";
+            cout << "| Invalid choice!                |\n";
+            cout << "+--------------------------------+\n";
             system("pause");
             continue;
         }
 
-        system("cls");
+        while (true) {
+            system("cls");
+            cout << "==================================\n";
+            cout << "Edit Discount (" << memberType << ")\n";
+            cout << "==================================\n\n";
+            cout << "Current Discount: " << fixed << setprecision(2) << (currentDiscount * 100) << " %\n\n";
 
-        cout << "==================================\n";
-        cout << "Edit Discount (" << memberType << ")\n";
-        cout << "==================================\n\n";
-        cout << "Current Discount: " << fixed << setprecision(2) << (currentDiscount * 100) << " %\n\n";
+            cout << "Enter new discount (e.g., 10 for 10%): ";
+            if (!(cin >> newDiscount)) {
+                clearInputBuffer();
+                system("cls");
+                cout << "+--------------------------------+\n";
+                cout << "| Invalid input!                 |\n";
+                cout << "+--------------------------------+\n";
+                system("pause");
+                continue;
+            }
+            clearInputBuffer();
 
-        cout << "Enter new Discount % (e.g., 10 for 10%): ";
-        cin >> newDiscount;
+            if (newDiscount < 0 || newDiscount > 100) {
+                system("cls");
+                cout << "+---------------------------------+\n";
+                cout << "| Discount must be between 0-100! |\n";
+                cout << "+---------------------------------+\n";
+                system("pause");
+                continue;
+            }
+
+            break;
+        }
 
         cout << "\nChange discount from " << (currentDiscount * 100) << "% to " << newDiscount << "% ?\n";
         cout << "Confirm (y/n): ";
-        cin >> confirm;
+        if (!(cin >> confirm)) {
+            clearInputBuffer();
+            system("cls");
+            cout << "+--------------------------------+\n";
+            cout << "| Invalid choice!                |\n";
+            cout << "+--------------------------------+\n";
+            system("pause");
+            continue;
+        }
+        clearInputBuffer();
 
         if (confirm == 'y' || confirm == 'Y')
         {
@@ -177,16 +162,16 @@ void editDiscount()
             }
 
             system("cls");
-            cout << "+-----------------------------+\n";
-            cout << "Discount updated successfully!\n";
-            cout << "+-----------------------------+\n";
+            cout << "+--------------------------------+\n";
+            cout << "| Discount updated successfully! |\n";
+            cout << "+--------------------------------+\n";
             system("pause");
         }
         else
         {
             system("cls");
             cout << "+-----------------------------+\n";
-            cout << "Update cancelled!\n";
+            cout << "| Update cancelled!           |\n";
             cout << "+-----------------------------+\n";
             system("pause");
         }
@@ -202,10 +187,8 @@ void editRoomPrice()
     double newPrice;
     char confirm;
 
-
     while (true) {
         system("cls");
-
         cout << "==================================\n";
         cout << "Edit Room Price\n";
         cout << "==================================\n\n";
@@ -216,8 +199,16 @@ void editRoomPrice()
         cout << "4. Back\n\n";
 
         cout << "Enter choice: ";
-        cin >> choice;
+        choice = getMenuChoice(1, 4);
 
+        if (choice == -1) {
+            system("cls");
+            cout << "+--------------------------------+\n";
+            cout << "| Invalid choice!                |\n";
+            cout << "+--------------------------------+\n";
+            system("pause");
+            continue;
+        }
 
         switch (choice)
         {
@@ -225,51 +216,70 @@ void editRoomPrice()
             roomType = "Single";
             currentPrice = singlePrice;
             break;
-
         case 2:
             roomType = "Double";
             currentPrice = doublePrice;
             break;
-
         case 3:
             roomType = "Deluxe";
             currentPrice = deluxePrice;
             break;
         case 4:
             return;
-
         default:
             system("cls");
-
-            cout << "+-----------------------------+\n";
-            cout << "Invalid choice!\n";
-            cout << "+-----------------------------+\n";
-
+            cout << "+--------------------------------+\n";
+            cout << "| Invalid choice!                |\n";
+            cout << "+--------------------------------+\n";
             system("pause");
             continue;
         }
 
+        while (true) {
+            system("cls");
+            cout << "==================================\n";
+            cout << "Edit " << roomType << " Room Price\n";
+            cout << "==================================\n\n";
 
-        system("cls");
+            cout << "Current Price: RM " << fixed << setprecision(2) << currentPrice << "\n\n";
 
-        cout << "==================================\n";
-        cout << "Edit " << roomType << " Room Price\n";
-        cout << "==================================\n\n";
+            cout << "Enter new price (RM): ";
+            if (!(cin >> newPrice)) {
+                clearInputBuffer();
+                system("cls");
+                cout << "+--------------------------------+\n";
+                cout << "| Invalid input!                 |\n";
+                cout << "+--------------------------------+\n";
+                system("pause");
+                continue;
+            }
+            clearInputBuffer();
 
+            if (newPrice < 0) {
+                system("cls");
+                cout << "+--------------------------------+\n";
+                cout << "| Price cannot be negative!      |\n";
+                cout << "+--------------------------------+\n";
+                system("pause");
+                continue;
+            }
 
-        cout << "Current Price: RM " << fixed << setprecision(2) << currentPrice << "\n\n";
-
-
-        cout << "Enter new price (RM): ";
-        cin >> newPrice;
-
+            break;
+        }
 
         cout << "\nChange price from RM "<< currentPrice << " to RM " << newPrice << "?\n";
 
-
         cout << "Confirm (y/n): ";
-        cin >> confirm;
-
+        if (!(cin >> confirm)) {
+            clearInputBuffer();
+            system("cls");
+            cout << "+--------------------------------+\n";
+            cout << "| Invalid choice!                |\n";
+            cout << "+--------------------------------+\n";
+            system("pause");
+            continue;
+        }
+        clearInputBuffer();
 
         if (confirm == 'y' || confirm == 'Y')
         {
@@ -292,28 +302,22 @@ void editRoomPrice()
             }
 
             system("cls");
-
             cout << "+-----------------------------+\n";
-            cout << "Price updated successfully!\n";
+            cout << "| Price updated successfully! |\n";
             cout << "+-----------------------------+\n";
-
-
             system("pause");
 
         }
         else
         {
             system("cls");
-
             cout << "+-----------------------------+\n";
-            cout << "Update cancelled!\n";
+            cout << "| Update cancelled!           |\n";
             cout << "+-----------------------------+\n";
-
-
             system("pause");
         }
     }
-}    
+}
 
 
 void priceManagement() {
@@ -331,7 +335,16 @@ void priceManagement() {
         cout << "5. Exit\n\n";
 
         cout << "Enter your choice: ";
-        cin >> choice;
+        choice = getMenuChoice(1, 5);
+
+        if (choice == -1) {
+            system("cls");
+            cout << "+--------------------------------+\n";
+            cout << "| Invalid choice!                |\n";
+            cout << "+--------------------------------+\n";
+            system("pause");
+            continue;
+        }
 
         switch (choice) {
         case 1:
@@ -351,12 +364,9 @@ void priceManagement() {
             return;
         default:
             system("cls");
-
-            cout << "+-----------------------------+\n";
-            cout << "Invalid choice!\n";
-            cout << "+-----------------------------+\n";
-
-
+            cout << "+--------------------------------+\n";
+            cout << "| Invalid choice!                |\n";
+            cout << "+--------------------------------+\n";
             system("pause");
         }
     }
