@@ -58,6 +58,7 @@ int main(){
 			reporting();
 			break;
 		case 6:
+			system("cls");
 			return 0;
 		default:
 			system("cls");
