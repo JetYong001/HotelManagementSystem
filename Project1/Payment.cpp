@@ -64,6 +64,9 @@ double calculateTotalAmount(int bookingIndex) {
     else if (customerType == "VIP") {
         return bookings[bookingIndex].nights * (roomPrice * (1.0 - vipDiscount));
     }
+    else if (customerType == "Regular") {
+        return bookings[bookingIndex].nights * (roomPrice * (1.0 - regularDiscount));
+    }
     else {
         return bookings[bookingIndex].nights * roomPrice;
     }
