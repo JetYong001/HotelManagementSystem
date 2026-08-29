@@ -187,7 +187,6 @@ bool processPayment(string bookingID) {
         }
 
         bool paymentConfirmed = false;
-        bool cancelTransaction = false;
 
         while (true) {
             string headerTitle = (method == 1) ? "CASH PAYMENT" : methods[method - 1] + " PAYMENT";
@@ -214,10 +213,10 @@ bool processPayment(string bookingID) {
             else if (confirm == "N" || confirm == "n") {
                 system("cls");
                 cout << "+--------------------------+\n";
-                cout << "| Payment cancelled.       |\n";
+                cout << "| Returning to payment     |\n";
+                cout << "| method selection.        |\n";
                 cout << "+--------------------------+\n\n";
                 system("pause");
-                cancelTransaction = true;
                 break;
             }
             else {
@@ -227,10 +226,6 @@ bool processPayment(string bookingID) {
                 cout << "+--------------------------------+\n\n";
                 system("pause");
             }
-        }
-
-        if (cancelTransaction) {
-            return false;
         }
 
         if (paymentConfirmed) {

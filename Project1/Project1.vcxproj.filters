@@ -58,7 +58,7 @@
       <Filter>Source Files\Payment</Filter>
     </ClCompile>
     <ClCompile Include="reporting.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Report</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
