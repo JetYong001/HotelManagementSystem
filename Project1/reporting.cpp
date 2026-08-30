@@ -205,23 +205,29 @@ void reporting() {
         cout << "2. Search by Year\n";
         cout << "3. Overall Report\n";
         cout << "4. Exit\n\n";
+        
         cout << "Enter choice: ";
-
         int choice = getMenuChoice(1, 4);
+
         if (choice == -1) {
             displayMessage("Invalid choice! Please enter a number from 1 to 4.           ");
             continue;
         }
 
         switch (choice) {
-        case 1: searchReportByMonth(); 
+        case 1: 
+            searchReportByMonth(); 
             break;
-        case 2: searchReportByYear(); 
+        case 2: 
+            searchReportByYear(); 
             break;
-        case 3: displayOverallReport(); 
+        case 3: 
+            displayOverallReport(); 
             break;
         case 4: 
             return;
+        default:
+            displayMessage("Invalid choice! Please enter a number from 1 to 4.           ");
         }
     }
 }

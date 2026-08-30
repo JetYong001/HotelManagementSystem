@@ -161,18 +161,16 @@ void searchBooking()
                 cout << "Room Type    : " << bookings[i].roomType << "\n";
                 cout << "Status       : " << bookings[i].status << "\n";
                 cout << "-------------------------------------\n\n";
-                system("pause");
             }
         }
 
         if (!found)
         {
-            system("cls");
             cout << "+-----------------------------+\n";
             cout << "| Booking not found!          |\n";
             cout << "+-----------------------------+\n";
-            system("pause");
         }
+        system("pause");
     }
 }
 
@@ -301,9 +299,9 @@ void checkOutBooking() {
                     bookings[i].checkedOut = true;
                     bookings[i].status = "Complete";
                     system("cls");
-                    cout << "+-------------------------------------------------------------+\n";
+                    cout << "+-------------------------------------------------------+\n";
                     cout << "| Check-out successful! Room " << bookings[i].roomNumber << " is now available.     |\n";
-                    cout << "+-------------------------------------------------------------+\n";
+                    cout << "+-------------------------------------------------------+\n";
                     system("pause");
                     success = true;
                 }
@@ -420,7 +418,7 @@ void cancelBooking() {
                     }
                     system("cls");
                     cout << "+----------------------------------------------------------+\n";
-                    cout << "| Booking " << id << " successfully cancelled and room released. |\n";
+                    cout << "| Booking " << id << " successfully cancelled and room released.   |\n";
                     cout << "+----------------------------------------------------------+\n";
                     system("pause");
                     break;
