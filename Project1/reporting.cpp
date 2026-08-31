@@ -35,6 +35,7 @@ bool getBookingYearAndMonth(const Booking& booking, int& year, int& month) {
 
 Report generateReport(const vector<Booking>& bookingRecords, const vector<Payment>& paymentRecords) {
     Report report{ 0, 0.0, 0, 0 };
+    set<string> customerIds;
 
     for (const Payment& payment : paymentRecords) {
         if (payment.paymentStatus) {
@@ -45,9 +46,12 @@ Report generateReport(const vector<Booking>& bookingRecords, const vector<Paymen
     for (const Booking& booking : bookingRecords) {
         if (!booking.cancelled) {
             ++report.totalBookings;
+            if (!booking.customerID.empty()) {
+                customerIds.insert(booking.customerID);
+            }
         }
     }
-    report.totalCustomers = customerCount;
+    report.totalCustomers = static_cast<int>(customerIds.size());
     return report;
 }
 
@@ -97,6 +101,11 @@ int getCurrentYear() {
 }
 
 void searchReportByMonth() {
+    if (bookingCount == 0) {
+        displayMessage("No booking records are available for a monthly report.       ");
+        return;
+    }
+
     const int currentYear = getCurrentYear();
 
     while (true) {
@@ -180,7 +189,7 @@ void searchReportByYear() {
 
 void displayOverallReport() {
     vector<Booking> bookingRecords(bookings, bookings + bookingCount);
-    if (bookingRecords.empty() && payments.empty() && customerCount == 0) {
+    if (bookingRecords.empty() && payments.empty()) {
         displayMessage("No booking or payment records are available for reporting.   ");
         return;
     }
