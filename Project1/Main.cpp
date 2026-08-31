@@ -86,6 +86,9 @@ int main(){
 			break;
 		case 6:
 			system("cls");
+			cout << "+---------------------------------+\n";
+			cout << "| Thank you for using the system! |\n";
+			cout << "+---------------------------------+\n";
 			return 0;
 		default:
 			system("cls");
