@@ -41,9 +41,9 @@ int main(){
 
 	int choice;
 	initializeRooms();
+	showWelcomePage();
 
 	while (true) {
-		showWelcomePage();
 		system("cls");
 		cout << "==================================\n";
 		cout << "HOTEL RESERVATION SYSTEM\n";
