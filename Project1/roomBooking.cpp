@@ -201,6 +201,7 @@ void checkInBooking() {
                     cout << "| Cannot check-in. This booking has been cancelled.      |\n";
                     cout << "+--------------------------------------------------------+\n";
                     system("pause");
+                    break;
                 }
                 else if (bookings[i].checkedIn && !bookings[i].checkedOut) {
                     system("cls");
@@ -208,6 +209,7 @@ void checkInBooking() {
                     cout << "| Cannot check-in. This booking is already checked-in.   |\n";
                     cout << "+--------------------------------------------------------+\n";
                     system("pause");
+                    break;
                 }
                 else if (bookings[i].checkedOut) {
                     system("cls");
@@ -215,6 +217,7 @@ void checkInBooking() {
                     cout << "| Cannot check-in. This booking is already completed.    |\n";
                     cout << "+--------------------------------------------------------+\n";
                     system("pause");
+                    break;
                 }
                 else {
                     bookings[i].checkedIn = true;
@@ -239,6 +242,7 @@ void checkInBooking() {
             cout << "|        Booking ID not found!       |\n";
             cout << "+------------------------------------+\n\n";
             system("pause");
+            break;
         }
         else if (success) {
             return;
@@ -274,6 +278,7 @@ void checkOutBooking() {
                     cout << "| Cannot check-out. This booking has been cancelled.          |\n";
                     cout << "+-------------------------------------------------------------+\n";
                     system("pause");
+                    break;
                 }
                 else if (!bookings[i].checkedIn) {
                     system("cls");
@@ -281,6 +286,7 @@ void checkOutBooking() {
                     cout << "| Cannot check-out. This booking has not been checked-in yet. |\n";
                     cout << "+-------------------------------------------------------------+\n";
                     system("pause");
+                    break;
                 }
                 else if (bookings[i].checkedOut) {
                     system("cls");
@@ -288,6 +294,7 @@ void checkOutBooking() {
                     cout << "| Cannot check-out. This booking is already checked-out.      |\n";
                     cout << "+-------------------------------------------------------------+\n";
                     system("pause");
+                    break;
                 }
                 else {
                     for (int r = 0; r < MAX_ROOM; r++) {
@@ -317,6 +324,7 @@ void checkOutBooking() {
             cout << "|        Booking ID not found!       |\n";
             cout << "+------------------------------------+\n\n";
             system("pause");
+            break;
         }
         else if (success) {
             return;
