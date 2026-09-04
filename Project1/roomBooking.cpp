@@ -382,8 +382,12 @@ void cancelBooking() {
     cout << "==================================\n";
     cout << "           CANCEL BOOKING          \n";
     cout << "==================================\n\n";
-    cout << "Enter Booking ID: ";
+    cout << "Enter Booking ID (enter x to go back): ";
     getline(cin >> ws, id);
+
+    if (id == "x" || id == "X") {
+        return;
+    }
 
     id = toUpperString(id);
     bool found = false;
@@ -395,6 +399,15 @@ void cancelBooking() {
                 system("cls");
                 cout << "+------------------------------------------+\n";
                 cout << "| This booking has already been cancelled! |\n";
+                cout << "+------------------------------------------+\n";
+                system("pause");
+                return;
+            }
+
+            if (bookings[i].checkedOut) {
+                system("cls");
+                cout << "+------------------------------------------+\n";
+                cout << "| This booking has already been check-out! |\n";
                 cout << "+------------------------------------------+\n";
                 system("pause");
                 return;
